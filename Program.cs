@@ -27,13 +27,6 @@ static class Program
             receiverOptions: receiverOptions,
             cancellationToken: cts.Token
         );
-        
-        creditBot.StartReceiving(
-            updateHandler: HandleUpdateAsync,
-            pollingErrorHandler: HandlePollingErrorAsync,
-            receiverOptions: receiverOptions,
-            cancellationToken: cts.Token
-        );
 
         var depositBotUser = await depositBot.GetMeAsync();
         var creditBotUser = await creditBot.GetMeAsync();
