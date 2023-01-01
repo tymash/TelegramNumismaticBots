@@ -60,12 +60,12 @@ static class Program
 
             Console.WriteLine($"Received a '{messageText}' message in chat {chatId}.");
 
-            await botClient.ForwardMessageAsync(
-                chatId: 573625848,
-                fromChatId: chatId,
-                messageId: message.MessageId,
-                cancellationToken: cancellationToken
-            );
+            // await botClient.ForwardMessageAsync(
+            //     chatId: 573625848,
+            //     fromChatId: chatId,
+            //     messageId: message.MessageId,
+            //     cancellationToken: cancellationToken
+            // );
             
             // Echo received message text
             await botClient.SendTextMessageAsync(
