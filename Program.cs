@@ -11,7 +11,7 @@ static class Program
     static async Task Main(string[] args)
     {
         var depositBot = new TelegramBotClient("5920158597:AAF7QXDlXSUfKhH9F-_GymGKOttbjo6CgAA");
-        // var creditBot = new TelegramBotClient("5817236422:AAH1TPuHvHwFLt8W6WYM-LCQ3-EmVYQjMz4");
+        var creditBot = new TelegramBotClient("5817236422:AAH1TPuHvHwFLt8W6WYM-LCQ3-EmVYQjMz4");
 
         using CancellationTokenSource cts = new();
 
@@ -27,12 +27,19 @@ static class Program
             receiverOptions: receiverOptions,
             cancellationToken: cts.Token
         );
+        
+        creditBot.StartReceiving(
+            updateHandler: HandleUpdateAsync,
+            pollingErrorHandler: HandlePollingErrorAsync,
+            receiverOptions: receiverOptions,
+            cancellationToken: cts.Token
+        );
 
         var depositBotUser = await depositBot.GetMeAsync();
-        // var creditBotUser = await creditBot.GetMeAsync();
+        var creditBotUser = await creditBot.GetMeAsync();
 
         Console.WriteLine($"Start listening for @{depositBotUser.Username}");
-        // Console.WriteLine($"Start listening for @{creditBotUser.Username}");
+        Console.WriteLine($"Start listening for @{creditBotUser.Username}");
         Console.ReadLine();
 
         // Send cancellation request to stop bot
@@ -53,12 +60,12 @@ static class Program
 
             Console.WriteLine($"Received a '{messageText}' message in chat {chatId}.");
 
-            // await botClient.ForwardMessageAsync(
-            //     chatId: 573625848,
-            //     fromChatId: chatId,
-            //     messageId: message.MessageId,
-            //     cancellationToken: cancellationToken
-            // );
+            await botClient.ForwardMessageAsync(
+                chatId: 573625848,
+                fromChatId: chatId,
+                messageId: message.MessageId,
+                cancellationToken: cancellationToken
+            );
             
             // Echo received message text
             await botClient.SendTextMessageAsync(
