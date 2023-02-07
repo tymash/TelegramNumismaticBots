@@ -66,13 +66,7 @@ static class Program
                 messageId: message.MessageId,
                 cancellationToken: cancellationToken
             );
-            
-            // Echo received message text
-            await botClient.SendTextMessageAsync(
-                chatId: chatId,
-                text: "Your message will be reviewed",
-                cancellationToken: cancellationToken);
-            
+
             Console.WriteLine("Message review sent");
         }
         
